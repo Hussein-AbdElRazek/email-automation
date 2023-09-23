@@ -18,6 +18,10 @@ const FormCard = ({ children, title }) =>
             <Box
                 variant='none'
                 sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexDirection: "column",
                     height: "calc(100vh - 32px)",
                     overflow: "auto",
                     px: 5,

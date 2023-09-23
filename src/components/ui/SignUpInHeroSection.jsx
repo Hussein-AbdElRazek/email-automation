@@ -7,6 +7,7 @@ const SignUpInHeroSection = () =>
 
     return (
         <Grid
+            item
             md={6}
             lg={6}
             xl={6}
