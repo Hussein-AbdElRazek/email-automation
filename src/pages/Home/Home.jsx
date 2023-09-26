@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import SendEmail from "../Send Email/SendEmail";
 import Scheduled from "../Scheduled/Scheduled";
 import AddTemplate from "../AddTemplate/AddTemplate";
+import AllTemplates from "../AllTemplates/AllTemplates";
 const Home = () =>
 {
 
@@ -20,6 +21,7 @@ const Home = () =>
                         <Route path='send' element={<SendEmail />} />
                         <Route path='scheduled' element={<Scheduled />} />
                         <Route path='add-template' element={<AddTemplate />} />
+                        <Route path='templates' element={<AllTemplates />} />
                     </Routes>
                 </Box>
             </Navbar>

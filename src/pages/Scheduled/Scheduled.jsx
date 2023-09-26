@@ -24,7 +24,7 @@ const Scheduled = () =>
 
     const [scheduledList, setScheduledList] = useState([]);
 
-    //get all Admin from data base
+    //get all Scheduled List from data base
     useEffect(() =>
     {
         const getResponse = ({ message, data, numOfPages, totalNumOfItems, numOfItems }) =>

@@ -1,15 +1,22 @@
 import { LoadingButton } from "@mui/lab"
 import { Grid, Paper, Typography } from "@mui/material"
-import { useState } from "react";
+
 import Input from "../../components/formik/Input";
 import FormContainer from "../../components/formik/FormContainer";
 import { templateValidationSchema } from "./templateValidationSchema";
 import { templateInitialValues, templateInputs } from "./templateInputsData";
 const AddTemplateUi = (props) =>
 {
-    const { handleAddTemplate, isLoadingAddTemplate, details, initialValues } = props;
-    const [templateData, setTemplateData] = useState(templateInitialValues);
-    if (!!details) setTemplateData(initialValues)
+    const {
+        handleAddTemplate,
+        isLoading,
+        details,
+        initialValues,
+        isEdit,
+        handleEditTemplate,
+    } = props;
+    let templateData = templateInitialValues;
+    if (!!details || !!isEdit) templateData = initialValues;
     return (
         <Paper
             variant="outlined"
@@ -20,11 +27,11 @@ const AddTemplateUi = (props) =>
                 margin: "auto"
             }}
         >
-            <Typography variant="h5" mb={2}>Template Data</Typography>
+            {(!details && !isEdit)&&<Typography variant="h5" mb={2}>Template Data</Typography>}
             <FormContainer
                 initialValues={templateData}
                 validationSchema={templateValidationSchema}
-                onSubmit={handleAddTemplate}
+                onSubmit={isEdit ? handleEditTemplate : handleAddTemplate}
                 enableReinitialize
             >
                 <Grid
@@ -39,12 +46,12 @@ const AddTemplateUi = (props) =>
                             key={input.name}
                         >
                             <Input
-                                disabled={!!details || isLoadingAddTemplate}
+                                disabled={!!details || isLoading}
                                 {...input}
                             />
                         </Grid>
                     ))}
-                    {!details && (
+                    {(!details && !isEdit) && (
                         <Grid
                             item
                             xs={12}
@@ -52,11 +59,27 @@ const AddTemplateUi = (props) =>
                             <LoadingButton
                                 type="submit"
                                 variant="contained"
-                                loading={isLoadingAddTemplate}
+                                loading={isLoading}
                                 size="large"
                                 fullWidth
                             >
                                 Send
+                            </LoadingButton>
+                        </Grid>
+                    )}
+                    {(isEdit) && (
+                        <Grid
+                            item
+                            xs={12}
+                        >
+                            <LoadingButton
+                                type="submit"
+                                variant="contained"
+                                loading={isLoading}
+                                size="large"
+                                fullWidth
+                            >
+                                Confirm Edit
                             </LoadingButton>
                         </Grid>
                     )}

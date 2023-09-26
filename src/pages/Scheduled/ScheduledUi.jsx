@@ -1,11 +1,8 @@
-import { useEffect, useState } from 'react';
 import
 { DeleteOutlined as DeleteIcon } from '@mui/icons-material';
 import { Box, IconButton, Typography } from '@mui/material';
-import
-{
-    DataGrid,
-} from '@mui/x-data-grid';
+
+import Table from '../../components/ui/Table';
 const ScheduledUi = (props) =>
 {
     const {
@@ -106,39 +103,17 @@ const ScheduledUi = (props) =>
                 </IconButton>))
         },
     ];
-    //handlePagination
-    const [rowCountState, setRowCountState] = useState(totalNumberOfItems);
-    useEffect(() =>
-    {
-        setRowCountState((prevRowCountState) =>
-            totalNumberOfItems !== undefined ? totalNumberOfItems : prevRowCountState,
-        );
-    }, [totalNumberOfItems, setRowCountState]);
-    const handlePaginationModelChange = (params) =>
-    {
-        setCurrentPage(params.page)
-        setPageSize(params.pageSize)
-    }
     return (
-        <DataGrid
+        <Table
             rows={rows}
             columns={columns}
-            loading={isLoading || isLoadingCancelScheduledEvent}
-            initialState={{
-                pagination: {
-                    paginationModel: { pageSize: 10, page: 0 },
-                },
-            }}
-            pagination
-            paginationMode="server"
+            isLoading={isLoading || isLoadingCancelScheduledEvent}
             page={currentPage}
+            setCurrentPage={setCurrentPage}
             pageSize={pageSize}
-            pageSizeOptions={[10]}
-            rowCount={rowCountState}
-            rowsPerPageOptions={[10]}
-            onPaginationModelChange={handlePaginationModelChange}
+            setPageSize={setPageSize}
+            totalNumberOfItems={totalNumberOfItems}
             rowHeight={80}
-            sx={{ height: "80vh" }}
         />
     )
 }

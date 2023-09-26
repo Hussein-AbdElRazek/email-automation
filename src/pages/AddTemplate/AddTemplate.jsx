@@ -29,7 +29,7 @@ const AddTemplate = () =>
     return (
         <AddTemplateUi 
             handleAddTemplate={handleAddTemplate}
-            isLoadingAddTemplate={isLoadingAddTemplate}
+            isLoading={isLoadingAddTemplate}
         />
     )
 }
