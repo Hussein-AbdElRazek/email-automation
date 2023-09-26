@@ -3,6 +3,7 @@ import Navbar, { drawerWidth } from "../../components/navbar/Navbar";
 import { Route, Routes } from "react-router-dom";
 import SendEmail from "../Send Email/SendEmail";
 import Scheduled from "../Scheduled/Scheduled";
+import AddTemplate from "../AddTemplate/AddTemplate";
 const Home = () =>
 {
 
@@ -18,6 +19,7 @@ const Home = () =>
                         <Route index element={<SendEmail />} />
                         <Route path='send' element={<SendEmail />} />
                         <Route path='scheduled' element={<Scheduled />} />
+                        <Route path='add-template' element={<AddTemplate />} />
                     </Routes>
                 </Box>
             </Navbar>

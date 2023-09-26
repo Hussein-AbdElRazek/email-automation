@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 import { Field } from 'formik';
 
 
-const DateTimeInput = (props) =>
+const DateTimeInput = ({ disabled }) =>
 {
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -32,6 +32,7 @@ const DateTimeInput = (props) =>
                                         value={form.values.sendAt}
                                         onChange={(value) => form.setFieldValue("sendAt", value.$d)}
                                         fullWidth
+                                        disabled={disabled}
                                     />
                                     {(!!error) && (<FormHelperText sx={{ color: "#d32f2f", paddingLeft:"14px" }} >{error.error}</FormHelperText>)}
                                 </>

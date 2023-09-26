@@ -53,6 +53,7 @@ const SendEmailUi = (props) =>
                                 <Select
                                     {...templateNameInput}
                                     options={[{ label: "No template", value: "No template" }]}
+                                    disabled={isLoading}
                                 />
                             </Grid>
                             <Grid
@@ -65,6 +66,7 @@ const SendEmailUi = (props) =>
                             >
                                 <Input
                                     {...eventNameInput}
+                                    disabled={isLoading}
                                 />
                             </Grid>
                             <Grid
@@ -108,6 +110,7 @@ const SendEmailUi = (props) =>
                                                             <Input
                                                                 name={`recivers.${index}.email`}
                                                                 {...emailInput}
+                                                                disabled={isLoading}
                                                             />
                                                         </Box>
 
@@ -116,12 +119,14 @@ const SendEmailUi = (props) =>
                                                         >
                                                             <IconButton
                                                                 onClick={() => push({ email: "" })}
+                                                                disabled={isLoading}
                                                             >
                                                                 <AddRoundedIcon />
                                                             </IconButton>
                                                             {formik.values.recivers.length > 1 && (
                                                                 <IconButton
                                                                     onClick={() => remove(index)}
+                                                                    disabled={isLoading}
                                                                 >
                                                                     <RemoveRoundedIcon />
                                                                 </IconButton>
@@ -147,7 +152,10 @@ const SendEmailUi = (props) =>
                                     sm={12}
                                     xs={12}
                                 >
-                                    <Input {...input} />
+                                    <Input 
+                                        {...input} 
+                                        disabled={isLoading}
+                                    />
                                 </Grid>
                             ))
                             }
@@ -158,6 +166,7 @@ const SendEmailUi = (props) =>
                                 <Checkbox
                                     checked={isScheduled}
                                     onChange={handleIsScheduled}
+                                    disabled={isLoading}
                                 />
                                 <Typography display="inline">
                                     Send schedule?
@@ -168,7 +177,7 @@ const SendEmailUi = (props) =>
                                     item
                                     xs={12}
                                 >
-                                    <DateTimeInput />
+                                    <DateTimeInput disabled={isLoading} />
                                 </Grid>
                             )}
                             <Grid
