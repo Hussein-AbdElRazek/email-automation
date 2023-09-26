@@ -12,8 +12,8 @@ import PendingActionsIcon from '@mui/icons-material/PendingActions';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import SubjectIcon from '@mui/icons-material/Subject';
 import { useTheme } from '@emotion/react';
-import { NavLink } from 'react-router-dom';
-
+import { NavLink, useNavigate } from 'react-router-dom';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export const drawerWidth = 220;
 
@@ -86,6 +86,7 @@ function Navbar(props)
 {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate()
 
   const handleDrawerOpen = () =>
   {
@@ -111,7 +112,6 @@ function Navbar(props)
     setTabValue(newTabValue);
   };
 
-
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -132,6 +132,10 @@ function Navbar(props)
           <Link sx={{ textDecoration: "none", color: "white" }} component={NavLink} to="/" variant='h6' onClick={() => setTabValue(0)}>
             Email Automation
           </Link>
+          <Box flexGrow={1}/>
+          <IconButton onClick={()=> navigate("profile")}>
+            <AccountCircleIcon sx={{color:"white"}} />
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
