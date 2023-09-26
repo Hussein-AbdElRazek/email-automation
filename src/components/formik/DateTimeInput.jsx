@@ -23,10 +23,6 @@ const DateTimeInput = (props) =>
                     >
                         {({ field, form, meta: error }) =>
                         {
-                            // const dateError = !!error && touched;
-                            console.log('form', form)
-                            console.log('error', error)
-                            // console.log('touched', touched)
                             return (
                                 <>
                                     <DateTimePicker
