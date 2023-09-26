@@ -17,6 +17,10 @@ const SendEmailUi = (props) =>
         isLoading,
         isScheduled,
         handleIsScheduled,
+        templateOptions,
+        isLoadingGetAllTemplates,
+        handleTemplatesScroll,
+        onTemplateChange,
     } = props;
 
     return (
@@ -52,8 +56,14 @@ const SendEmailUi = (props) =>
                             >
                                 <Select
                                     {...templateNameInput}
-                                    options={[{ label: "No template", value: "No template" }]}
+                                    options={[
+                                        { label: "No template", value: "No template" },
+                                        ...templateOptions
+                                    ]}
                                     disabled={isLoading}
+                                    isLoading={isLoadingGetAllTemplates}
+                                    handleSelectScroll={handleTemplatesScroll}
+                                    onChange={onTemplateChange}
                                 />
                             </Grid>
                             <Grid
@@ -76,7 +86,6 @@ const SendEmailUi = (props) =>
                                 md={12}
                                 sm={12}
                                 xs={12}
-
                             >
                                 <Paper
                                     variant="outlined"
@@ -113,7 +122,6 @@ const SendEmailUi = (props) =>
                                                                 disabled={isLoading}
                                                             />
                                                         </Box>
-
                                                         <Box
                                                             mb="28px"
                                                         >
@@ -130,17 +138,14 @@ const SendEmailUi = (props) =>
                                                                 >
                                                                     <RemoveRoundedIcon />
                                                                 </IconButton>
-
                                                             )}
                                                         </Box>
                                                     </Paper>
                                                 ))
-
                                             )
                                         }}
                                     </FieldArray>
                                 </Paper>
-
                             </Grid>
                             {emailCredentialsInputs.map((input) => (
                                 <Grid
@@ -152,8 +157,8 @@ const SendEmailUi = (props) =>
                                     sm={12}
                                     xs={12}
                                 >
-                                    <Input 
-                                        {...input} 
+                                    <Input
+                                        {...input}
                                         disabled={isLoading}
                                     />
                                 </Grid>

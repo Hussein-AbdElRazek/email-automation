@@ -1,5 +1,5 @@
 import { Field } from "formik";
-import { MenuItem, TextField, Tooltip } from "@mui/material";
+import { Box, CircularProgress, MenuItem, TextField, Tooltip } from "@mui/material";
 
 function Select(props)
 {
@@ -9,9 +9,11 @@ function Select(props)
         type,
         disabled,
         options,
+        isLoading,
+        handleSelectScroll,
+        onChange,
         ...rest
     } = props;
-
     return (
         <Field
             name={name}>
@@ -31,9 +33,37 @@ function Select(props)
                                 form.errors[name] : " "}
                             fullWidth
                             variant="filled"
-                            sx={{ mb: 1 }}
+                            sx={{
+                                mb: 1,
+                            }}
                             {...field}
                             {...rest}
+                            SelectProps={{
+                                MenuProps:
+                                {
+                                    PaperProps: {
+                                        onScroll: handleSelectScroll
+                                    }
+                                }
+                            }}
+                            onChange={
+                                typeof onChange === "function"
+                                    ? (e) =>
+                                    {
+                                        form.setFieldValue(
+                                            name,
+                                            e.target.value
+                                        );
+                                        props.onChange(e.target.value, form);
+                                    }
+                                    : (e) =>
+                                    {
+                                        form.setFieldValue(
+                                            name,
+                                            e.target.value
+                                        );
+                                    }
+                            }
                         >
                             {options.map((option) => (
                                 <MenuItem
@@ -42,11 +72,16 @@ function Select(props)
                                     {option.label}
                                 </MenuItem>
                             ))}
+                            {isLoading && (
+                                <Box sx={{ width: "100%", textAlign: "center", mt: 1 }}>
+                                    <CircularProgress size={20} />
+                                </Box>
+                            )}
                         </TextField>
                     </Tooltip>
                 );
             }}
-        </Field>
+        </Field >
     );
 }
 

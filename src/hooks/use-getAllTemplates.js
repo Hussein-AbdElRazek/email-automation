@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import useHttp from './use-http'
 import dayjs from 'dayjs';
+import { mergeToUnique } from '../helpers/mergeToUnique';
 
 const useGetAllTemplates = () =>
 {
@@ -45,8 +46,8 @@ const useGetAllTemplates = () =>
                     templateMap.set(template.templateName, template)
                 })
                 setAllTemplates(allData)
-                setTemplateOptions(templateOptions)
-                setTemplateMap(templateMap)
+                setTemplateOptions((prev) => mergeToUnique(prev, templateOptions))
+                setTemplateMap((prev) => new Map([...prev, ...templateMap]))
 
                 if (numOfPages !== totalPages) setTotalPages(numOfPages)
                 if (totalNumOfItems !== totalNumberOfItems) setTotalNumberOfItems(totalNumOfItems)
@@ -57,7 +58,7 @@ const useGetAllTemplates = () =>
         {
             getAllTemplates(
                 {
-                    url: `getAllTemplates?page=${currentPage + 1}&limit=10`,
+                    url: `getAllTemplates?page=${currentPage + 1}&limit=5`,
                     method: "GET",
                 },
                 getResponse
@@ -73,6 +74,7 @@ const useGetAllTemplates = () =>
         setPageSize,
         pageSize,
         totalNumberOfItems,
+        totalPages,
         templateOptions,
         templateMap,
     }

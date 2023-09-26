@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useHttp from "../../hooks/use-http";
 import SendEmailUi from "./SendEmailUi"
+import useGetAllTemplates from "../../hooks/use-getAllTemplates";
 
 const SendEmail = () =>
 {
@@ -12,7 +13,17 @@ const SendEmail = () =>
         isLoading: isLoadingSendEmailScheduled,
         sendRequest: sendEmailScheduled
     } = useHttp();
+
+    const {
+        isLoadingGetAllTemplates,
+        currentPage,
+        setCurrentPage,
+        totalPages,
+        templateOptions,
+        templateMap,
+    } = useGetAllTemplates();
     const [isScheduled, setIsScheduled] = useState(false);
+
     const handleIsScheduled = (e) =>
     {
         setIsScheduled(e.target.checked)
@@ -84,12 +95,42 @@ const SendEmail = () =>
         else handleSendNow(submitData, resetForm)
 
     }
+    // handle pagination for templates 
+    const handleTemplatesScroll = (event) =>
+    {
+        const { scrollTop, clientHeight, scrollHeight } = event.target;
+        if (scrollTop + clientHeight >= scrollHeight)
+        {
+            if (currentPage < totalPages)
+            {
+                setCurrentPage((oldPage) => oldPage + 1)
+            }
+        }
+    };
+    const onTemplateChange = (value, form) =>
+    {
+        if (value === "No template")
+        {
+            form.setFieldValue("emailSubject", "");
+            form.setFieldValue("emailContent", "");
+        } else
+        {
+            const chosenTemplate = templateMap.get(value)
+            form.setFieldValue("emailSubject", chosenTemplate.emailSubject);
+            form.setFieldValue("emailContent", chosenTemplate.emailContent);
+        }
+
+    }
     return (
         <SendEmailUi
             handleSubmit={handleSubmit}
             isLoading={isLoadingSendEmailNow || isLoadingSendEmailScheduled}
             isScheduled={isScheduled}
             handleIsScheduled={handleIsScheduled}
+            templateOptions={templateOptions}
+            isLoadingGetAllTemplates={isLoadingGetAllTemplates}
+            handleTemplatesScroll={handleTemplatesScroll}
+            onTemplateChange={onTemplateChange}
         />
     )
 }
