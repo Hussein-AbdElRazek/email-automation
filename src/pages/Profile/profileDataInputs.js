@@ -9,12 +9,6 @@ export const profileDataInputs = [
     {
         control: "input",
         type: "text",
-        name: "bussinesIndustry",
-        label: "Industry of Business",
-    },
-    {
-        control: "input",
-        type: "text",
         name: "userName",
         label: "User Name",
         disabled: true
