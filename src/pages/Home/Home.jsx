@@ -1,6 +1,6 @@
 import { Box, Toolbar } from "@mui/material";
 import Navbar, { drawerWidth } from "../../components/navbar/Navbar";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import SendEmail from "../Send Email/SendEmail";
 import Scheduled from "../Scheduled/Scheduled";
 import AddTemplate from "../AddTemplate/AddTemplate";
@@ -24,6 +24,7 @@ const Home = () =>
                         <Route path='add-template' element={<AddTemplate />} />
                         <Route path='templates' element={<AllTemplates />} />
                         <Route path='profile' element={<Profile />} />
+                        <Route path="*" element={<Navigate to="/" replace={true} />} />
                     </Routes>
                 </Box>
             </Navbar>

@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import SignUp from './pages/SignUp/SignUp';
 import './App.css';
 import Login from './pages/Login/Login';
@@ -15,6 +15,7 @@ function App()
         <>
           <Route path='signup' element={<SignUp />} />
           <Route path='login' element={<Login />} />
+          <Route path="*" element={<Navigate to="/login" replace={true} />} />
         </>
       ) : (
         <Route path='/*' element={<Home />} />

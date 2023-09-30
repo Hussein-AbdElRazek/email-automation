@@ -20,7 +20,7 @@ function Input(props)
             {
                 const inputError = !!error && touched;
                 return (
-                    <Tooltip title={form.values[name]}>
+                    <Tooltip title={type !== "password" && form.values[name]}>
                         <TextField
                             name={name}
                             id={name}
