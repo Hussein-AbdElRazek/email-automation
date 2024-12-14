@@ -4,9 +4,7 @@ These my third task in my internship @Asterisc Technocrat
 
 Email automation is a way to create emails that reach the right people with the right message at the right moment—without doing the work every time, sending automated messages leveraging a marketing automation tool.
 
-## Visit Website from here:
 
-https://email-automation-jet.vercel.app/
 
 ## Main Features:
 
